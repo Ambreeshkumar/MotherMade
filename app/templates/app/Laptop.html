@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Laptop{% endblock title %}
+{% block cart %} {{totalitem}} {% endblock cart %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+    <!-- Side Bar for mobile filter -->
+   <div class="list-group">
+    <a href=" {% url 'laptop' %} " class="list-goup-item list-group-item-action"
+        aria-current="true"> All Laptop </a>
+    <a href=" {% url 'laptopdata' 'Apple-MacBook' %} "class="list-goup-item list-group-item-action"aria-current="true"> Apple MacBook </a>
+    <a href=" {% url 'laptopdata' 'Dell' %}" class="list-goup-item list-group-item-action"> Dell </a>
+    <a href=" {% url 'laptopdata' 'hp' %}" class="list-goup-item list-group-item-action"> hp </a>
+    <a href=" {% url 'laptopdata' 'below' %}" class="list-goup-item list-group-item-action"> below 30000</a>
+    <a href=" {% url 'laptopdata' 'above' %}" class="list-goup-item list-group-item-action"> above 30000</a>
+   </div>
+  </div>
+  <div class="col-sm-8">
+   <div class='row'>
+    
+    {% for product in laptop %}
+        <div class='col-sm-4 text-center mb-4'> 
+          <a href="{% url 'product-detail' product.id %}" class="btn"> 
+            <div class="item">
+              <img src=" {{product.Product_image.url}} " alt="" height=300 class=" ">
+              <div class="fw-bold"> {{product.title}} </div>
+              <div class="fw-bold">Rs. {{product.discounted_price}} 
+                <small class="fw-light text-decoration-line-through"> {{product.selling_price}}
+                </small></div>
+            </div>
+          </a>
+        </div>
+    {% endfor %}
+        
+
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
